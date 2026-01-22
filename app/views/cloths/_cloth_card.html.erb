@@ -1,0 +1,32 @@
+<div class="bg-white overflow-hidden shadow rounded-lg hover:shadow-lg transition-shadow">
+  <% if cloth.image.attached? %>
+    <div class="h-48 w-full bg-gray-200">
+      <%= image_tag cloth.image, class: "h-full w-full object-cover" %>
+    </div>
+  <% else %>
+    <div class="h-48 w-full bg-gray-200 flex items-center justify-center">
+      <span class="text-gray-400 text-sm">No image</span>
+    </div>
+  <% end %>
+  
+  <div class="px-4 py-5">
+    <h3 class="text-lg font-medium text-gray-900 mb-2"><%= cloth.name %></h3>
+    
+    <div class="space-y-1 text-sm text-gray-600 mb-4">
+      <p><span class="font-medium">Type:</span> <%= cloth.cloth_type.titleize %></p>
+      <p><span class="font-medium">Location:</span> <%= cloth.location.titleize %></p>
+      <% if cloth.color.present? %>
+        <p><span class="font-medium">Color:</span> <%= cloth.color %></p>
+      <% end %>
+      <% if cloth.company.present? %>
+        <p><span class="font-medium">Company:</span> <%= cloth.company %></p>
+      <% end %>
+    </div>
+    
+    <div class="flex gap-3 border-t pt-4">
+      <%= link_to "View", cloth, class: "text-indigo-600 hover:text-indigo-900 font-medium" %>
+      <%= link_to "Edit", edit_cloth_path(cloth), class: "text-gray-600 hover:text-gray-900 font-medium" %>
+      <%= button_to "Delete", cloth, method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "text-red-600 hover:text-red-900 font-medium" %>
+    </div>
+  </div>
+</div>

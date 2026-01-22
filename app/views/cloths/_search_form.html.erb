@@ -1,0 +1,14 @@
+<%= turbo_frame_tag "cloths_list" do %>
+  <div class="mb-6 bg-white p-4 rounded-lg shadow">
+    <%= form_with url: cloths_path, method: :get, data: { turbo_frame: "cloths_list", turbo_action: "advance" }, class: "flex flex-wrap gap-4" do |f| %>
+      <%= f.text_field :query, placeholder: "Search...", value: params[:query], class: "flex-1 min-w-[200px] rounded-md border-gray-300" %>
+      <%= f.select :cloth_type, Cloth.cloth_types.keys.map { |k| [k.titleize, k] }, { include_blank: "All Types" }, selected: params[:cloth_type], class: "rounded-md border-gray-300" %>
+      <%= f.select :location, Cloth.locations.keys.map { |k| [k.titleize, k] }, { include_blank: "All Locations" }, selected: params[:location], class: "rounded-md border-gray-300" %>
+      <%= f.select :color, options_for_select(@colors, params[:color]), { include_blank: "All Colors" }, class: "rounded-md border-gray-300" %>
+      <%= f.submit "Filter", class: "rounded-md bg-gray-600 px-4 py-2 text-white hover:bg-gray-700" %>
+      <%= link_to "Clear", cloths_path, class: "rounded-md bg-gray-300 px-4 py-2 text-gray-700 hover:bg-gray-400" %>
+    <% end %>
+  </div>
+
+  <%= render "cloths_grid" %>
+<% end %>

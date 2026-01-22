@@ -1,0 +1,11 @@
+<div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+  <% @cloths.each do |cloth| %>
+    <%= render "cloth_card", cloth: cloth %>
+  <% end %>
+</div>
+
+<% if @cloths.empty? %>
+  <div class="text-center py-12">
+    <p class="text-gray-500 text-lg">No clothes found. Start by adding your first item!</p>
+  </div>
+<% end %>

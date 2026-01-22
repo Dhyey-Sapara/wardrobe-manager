@@ -1,0 +1,18 @@
+<%= form_with(model: cloth, class: "space-y-6") do |form| %>
+  <%= render "form_errors", cloth: cloth %>
+
+  <div>
+    <%= form.label :name, class: "block text-sm font-medium text-gray-700" %>
+    <%= form.text_field :name, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" %>
+  </div>
+
+  <%= render "form_image", form: form, cloth: cloth %>
+  
+  <div>
+    <%= form.label :description, class: "block text-sm font-medium text-gray-700" %>
+    <%= form.text_area :description, rows: 4, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" %>
+  </div>
+
+  <%= render "form_fields", form: form %>
+  <%= render "form_actions" %>
+<% end %>

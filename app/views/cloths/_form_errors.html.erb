@@ -1,0 +1,10 @@
+<% if cloth.errors.any? %>
+  <div class="bg-red-50 border-l-4 border-red-400 p-4">
+    <h3 class="text-red-800 font-medium"><%= pluralize(cloth.errors.count, "error") %> prohibited this item:</h3>
+    <ul class="mt-2 list-disc list-inside text-red-700">
+      <% cloth.errors.each do |error| %>
+        <li><%= error.full_message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
