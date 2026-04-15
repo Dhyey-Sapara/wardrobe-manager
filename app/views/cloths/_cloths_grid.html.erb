@@ -1,4 +1,4 @@
-<div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+<div id="cloths_grid" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 transition-opacity duration-200" data-cloths-loading-target="grid">
   <% @cloths.each do |cloth| %>
     <%= render "cloth_card", cloth: cloth %>
   <% end %>
@@ -9,3 +9,17 @@
     <p class="text-gray-500 text-lg">No clothes found. Start by adding your first item!</p>
   </div>
 <% end %>
+
+<div id="show_more_container" class="mt-8 flex justify-center">
+  <% if @pagy.next %>
+    <%= link_to cloths_path(request.query_parameters.merge(page: @pagy.next)),
+        data: { turbo_stream: true, action: "click->cloths-loading#showMoreLoading" },
+        class: "show-more-btn rounded-md bg-white px-6 py-2 text-sm font-medium text-gray-700 border border-gray-300 hover:bg-gray-50 shadow-sm inline-flex items-center gap-2" do %>
+      <svg class="show-more-spinner hidden animate-spin h-4 w-4 text-indigo-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+      </svg>
+      <span class="show-more-text">Show More</span>
+    <% end %>
+  <% end %>
+</div>

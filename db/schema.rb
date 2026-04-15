@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_01_22_144554) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_14_153212) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -48,11 +48,34 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_22_144554) do
     t.string "company"
     t.datetime "created_at", null: false
     t.text "description"
-    t.integer "location", default: 0
+    t.bigint "location_id"
     t.string "name"
     t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["location_id"], name: "index_cloths_on_location_id"
+    t.index ["user_id"], name: "index_cloths_on_user_id"
+  end
+
+  create_table "locations", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "name", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_locations_on_user_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.boolean "admin", default: false, null: false
+    t.datetime "created_at", null: false
+    t.string "email", null: false
+    t.string "password_digest", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "cloths", "locations"
+  add_foreign_key "cloths", "users"
+  add_foreign_key "locations", "users"
 end

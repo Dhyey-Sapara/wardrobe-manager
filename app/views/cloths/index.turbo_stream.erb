@@ -1,0 +1,16 @@
+<%= turbo_stream.append "cloths_grid" do %>
+  <% @cloths.each do |cloth| %>
+    <%= render "cloth_card", cloth: cloth %>
+  <% end %>
+<% end %>
+
+<%= turbo_stream.replace "show_more_container" do %>
+  <div id="show_more_container" class="mt-8 flex justify-center">
+    <% if @pagy.next %>
+      <%= link_to "Show More",
+          cloths_path(request.query_parameters.merge(page: @pagy.next)),
+          data: { turbo_stream: true },
+          class: "rounded-md bg-white px-6 py-2 text-sm font-medium text-gray-700 border border-gray-300 hover:bg-gray-50 shadow-sm" %>
+    <% end %>
+  </div>
+<% end %>

@@ -1,0 +1,24 @@
+<%= form_with model: location, class: "space-y-5" do |f| %>
+  <% if location.errors.any? %>
+    <div class="bg-red-50 border-l-4 border-red-400 p-4">
+      <ul class="list-disc list-inside text-red-700 text-sm space-y-1">
+        <% location.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= f.label :name, class: "block text-sm font-medium text-gray-700 mb-1" %>
+    <%= f.text_field :name, required: true, autofocus: true,
+        class: "block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" %>
+  </div>
+
+  <div class="flex gap-3">
+    <%= f.submit location.persisted? ? "Update Location" : "Add Location",
+        class: "rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700 cursor-pointer" %>
+    <%= link_to "Cancel", locations_path,
+        class: "rounded-md bg-white px-4 py-2 text-sm font-medium text-gray-700 border border-gray-300 hover:bg-gray-50" %>
+  </div>
+<% end %>

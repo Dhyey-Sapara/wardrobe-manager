@@ -17,6 +17,18 @@
           <div class="flex items-center">
             <%= link_to "Wardrobe Manager", root_path, class: "text-xl font-semibold text-gray-900" %>
           </div>
+          <div class="flex items-center gap-4">
+            <% if logged_in? %>
+              <%= link_to "Locations", locations_path, class: "text-sm text-gray-600 hover:text-gray-900" %>
+              <span class="text-sm text-gray-400"><%= current_user.email %></span>
+              <%= button_to "Log out", logout_path, method: :delete,
+                  class: "text-sm text-gray-600 hover:text-gray-900 bg-transparent border-0 cursor-pointer" %>
+            <% else %>
+              <%= link_to "Log in", login_path, class: "text-sm text-gray-600 hover:text-gray-900" %>
+              <%= link_to "Sign up", signup_path,
+                  class: "rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-indigo-700" %>
+            <% end %>
+          </div>
         </div>
       </div>
     </nav>
@@ -25,6 +37,11 @@
       <% if notice %>
         <div class="bg-green-50 border-l-4 border-green-400 p-4 mb-4">
           <p class="text-green-700"><%= notice %></p>
+        </div>
+      <% end %>
+      <% if alert %>
+        <div class="bg-red-50 border-l-4 border-red-400 p-4 mb-4">
+          <p class="text-red-700"><%= alert %></p>
         </div>
       <% end %>
       <%= yield %>

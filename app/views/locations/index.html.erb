@@ -1,0 +1,33 @@
+<div class="sm:flex sm:items-center mb-6">
+  <div class="sm:flex-auto">
+    <h1 class="text-3xl font-semibold text-gray-900">Locations</h1>
+    <p class="mt-1 text-sm text-gray-500">Storage locations where you keep your clothes.</p>
+  </div>
+  <div class="mt-4 sm:mt-0">
+    <%= link_to "Add Location", new_location_path,
+        class: "inline-flex items-center rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700" %>
+  </div>
+</div>
+
+<% if @locations.any? %>
+  <div class="bg-white shadow rounded-lg divide-y divide-gray-200">
+    <% @locations.each do |location| %>
+      <div class="flex items-center justify-between px-6 py-4">
+        <div>
+          <p class="font-medium text-gray-900"><%= location.name %></p>
+          <p class="text-sm text-gray-500"><%= pluralize(location.cloths.count, "item") %></p>
+        </div>
+        <div class="flex gap-4">
+          <%= link_to "Edit", edit_location_path(location), class: "text-indigo-600 hover:text-indigo-900 text-sm font-medium" %>
+          <%= button_to "Delete", location, method: :delete,
+              data: { turbo_confirm: "Remove this location? Cloths stored here will have no location set." },
+              class: "text-red-600 hover:text-red-900 text-sm font-medium" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <div class="text-center py-12 bg-white rounded-lg shadow">
+    <p class="text-gray-500">No locations yet. Add your first storage location.</p>
+  </div>
+<% end %>

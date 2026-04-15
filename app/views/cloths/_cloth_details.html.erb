@@ -17,7 +17,7 @@
     
     <div>
       <dt class="text-sm font-medium text-gray-500">Location</dt>
-      <dd class="mt-1 text-sm text-gray-900"><%= @cloth.location.titleize %></dd>
+      <dd class="mt-1 text-sm text-gray-900"><%= @cloth.location&.name || "—" %></dd>
     </div>
     
     <% if @cloth.color.present? %>

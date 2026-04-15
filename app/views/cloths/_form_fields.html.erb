@@ -15,13 +15,15 @@
         class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" %>
   </div>
 
-  <!-- Location (enum) -->
+  <!-- Location (user's locations) -->
   <div>
-    <%= form.label :location, class: "block text-sm font-medium text-gray-700" %>
-    <%= form.select :location,
-        Cloth.locations.keys.map { |l| [l.humanize, l] },
+    <%= form.label :location_id, "Location", class: "block text-sm font-medium text-gray-700" %>
+    <%= form.collection_select :location_id, @locations, :id, :name,
         { include_blank: "Select location" },
         class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" %>
+    <p class="mt-1 text-xs text-gray-500">
+      <%= link_to "Manage locations", locations_path, class: "text-indigo-600 hover:underline" %>
+    </p>
   </div>
 
   <!-- Company -->

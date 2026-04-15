@@ -5,16 +5,19 @@ CLOTH_TYPE = %w[tshirt
                 sweatshirt
                 hoodie
                 jacket
+                blazer
                 kurta
                 shoes
                 other]
 
 class Cloth < ApplicationRecord
+  belongs_to :user
+  belongs_to :location, optional: true
+
   has_one_attached :image
   after_commit :compress_image, on: [ :create, :update ]
 
   enum :cloth_type, CLOTH_TYPE.each_with_index.to_h { |type, i| [ type, i ] }, prefix: true
-  enum :location, { surat: 0, indore: 1 }, prefix: true
 
   validates :name, presence: true
 
